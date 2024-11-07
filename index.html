@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalkulator Nilai - Muhammad Narendra - 122140050</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- Container utama untuk kalkulator nilai -->
+    <div class="calculator">
+      <h1>Kalkulator Nilai Akhir</h1>
+
+      <!-- Form untuk input nilai tugas, UTS, dan UAS -->
+      <form id="formNilai">
+        <!-- Input nilai tugas (dengan bobot 30%) -->
+        <label for="tugas">Nilai Tugas (30%)</label>
+        <input type="number" id="tugas" required />
+
+        <!-- Input nilai UTS (dengan bobot 30%) -->
+        <label for="uts">Nilai UTS (30%)</label>
+        <input type="number" id="uts" required />
+
+        <!-- Input nilai UAS (dengan bobot 40%) -->
+        <label for="uas">Nilai UAS (40%)</label>
+        <input type="number" id="uas" required />
+
+        <!-- Tombol untuk menghitung nilai akhir -->
+        <button type="button" onclick="hitungNilai()">Hitung Nilai</button>
+      </form>
+
+      <!-- Bagian hasil yang akan menampilkan nilai kontribusi, nilai akhir, huruf nilai, dan status kelulusan -->
+      <div id="hasil">
+        <div id="nilaitugas"></div>
+        <div id="nilaiuts"></div>
+        <div id="nilaiuas"></div>
+        <div id="nilaifinal"></div>
+        <div id="nilaihuruf"></div>
+        <div id="status"></div>
+      </div>
+    </div>
+
+    <script>
+      /**
+       * Menghitung nilai akhir berdasarkan inputan nilai tugas, UTS, dan UAS
+       * dan menampilkan hasilnya di dalam elemen #hasil
+       */
+      function hitungNilai() {
+        // Mengambil nilai dari input tugas, UTS, dan UAS
+        let inputTugas = document.getElementById("tugas").value;
+        let inputUts = document.getElementById("uts").value;
+        let inputUas = document.getElementById("uas").value;
+
+        // Mendefinisikan persentase kontribusi masing-masing komponen nilai
+        const persentaseTugas = 0.3;
+        const persentaseUts = 0.3;
+        const persentaseUas = 0.4;
+
+        let nilaiFinal, nilaiHuruf, nilaiTugas, nilaiUts, nilaiUas;
+
+        // Validasi nilai input, harus antara 0-100
+        if (
+          inputTugas < 0 ||
+          inputTugas > 100 ||
+          inputUts < 0 ||
+          inputUts > 100 ||
+          inputUas < 0 ||
+          inputUas > 100
+        ) {
+          alert("Nilai harus diantara 0-100");
+        } else {
+          // Menghitung kontribusi masing-masing nilai
+          nilaiTugas = inputTugas * persentaseTugas;
+          nilaiUts = inputUts * persentaseUts;
+          nilaiUas = inputUas * persentaseUas;
+          nilaiFinal = nilaiTugas + nilaiUts + nilaiUas;
+
+          // Menentukan huruf nilai berdasarkan nilai akhir
+          if (nilaiFinal >= 90 && nilaiFinal <= 100) {
+            nilaiHuruf = "A";
+          } else if (nilaiFinal >= 80 && nilaiFinal < 90) {
+            nilaiHuruf = "B";
+          } else if (nilaiFinal >= 70 && nilaiFinal < 80) {
+            nilaiHuruf = "C";
+          } else if (nilaiFinal >= 60 && nilaiFinal < 70) {
+            nilaiHuruf = "D";
+          } else if (nilaiFinal < 60 && nilaiFinal >= 0) {
+            nilaiHuruf = "E";
+          }
+
+          // Menampilkan hasil perhitungan di halaman
+          document.getElementById("nilaitugas").innerHTML =
+            "Kontribusi Nilai Tugas = " + nilaiTugas;
+          document.getElementById("nilaiuts").innerHTML =
+            "Kontribusi Nilai UTS = " + nilaiUts;
+          document.getElementById("nilaiuas").innerHTML =
+            "Kontribusi Nilai UAS = " + nilaiUas;
+          document.getElementById("nilaifinal").innerHTML =
+            "Nilai Akhir = " + nilaiFinal;
+          document.getElementById("nilaihuruf").innerHTML =
+            "Nilai Huruf = " + nilaiHuruf;
+
+          // Menentukan status kelulusan dan menerapkan gaya sesuai status
+          if (nilaiHuruf > "C" && nilaiHuruf <= "E") {
+            document.getElementById("status").innerHTML = "TIDAK LULUS";
+            document.getElementById("hasil").classList.add("tidaklulus");
+            document.getElementById("hasil").classList.remove("lulus");
+          } else if (nilaiHuruf <= "C" && nilaiHuruf >= "A") {
+            document.getElementById("status").innerHTML = "LULUS";
+            document.getElementById("hasil").classList.add("lulus");
+            document.getElementById("hasil").classList.remove("tidaklulus");
+          }
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.calculator {
+  background-color: #2c2c2c;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  font-size: 1.5em;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffcc00;
+}
+
+label {
+  display: block;
+  margin: 15px 0 5px;
+  font-size: 1em;
+}
+
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #444;
+  border-radius: 4px;
+  background-color: #3b3b3b;
+  color: #e0e0e0;
+}
+
+input[type="number"]::placeholder {
+  color: #888;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: #ffcc00;
+  color: #242424;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Animasi untuk hover */
+}
+
+button:hover {
+  background-color: #ffcc009c;
+}
+
+button:active {
+  transform: scale(0.98);
+  background-color: #ffcc009c;
+}
+
+#hasil {
+  margin-top: 20px;
+  transition: color 0.3s ease; /* Animasi untuk perubahan warna */
+}
+
+#hasil div {
+  margin: 5px 0;
+  font-size: 1em;
+}
+
+#hasil.lulus {
+  color: green;
+}
+
+#hasil.tidaklulus {
+  color: red;
+}
+
+/* Transisi warna dan perubahan opacity untuk #status */
+#status {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  opacity: 0;
+  transition: opacity 0.5s ease, color 0.3s ease;
+}
+
+/* Membuat #status muncul dengan perlahan */
+#hasil.lulus #status,
+#hasil.tidaklulus #status {
+  opacity: 1;
+}
+
+@media (max-width: 600px) {
+  .calculator {
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.3em;
+  }
+
+  label {
+    font-size: 0.9em;
+  }
+
+  input[type="number"],
+  button {
+    padding: 8px;
+    font-size: 0.9em;
+  }
+
+  #hasil div {
+    font-size: 0.9em;
+  }
+}
